@@ -5,6 +5,7 @@ import br.com.todo.project.eduardo.todolist.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,5 +17,15 @@ public class ToDoService {
     public ToDo findById(Long id) {
         Optional<ToDo> object = repository.findById(id);
         return object.orElse(null);
+    }
+
+    public List<ToDo> findAllOpen() {
+        List<ToDo> list = repository.findAllOpen();
+        return list;
+    }
+
+    public List<ToDo> findAllClose() {
+        List<ToDo> list = repository.findAllClose();
+        return list;
     }
 }
