@@ -28,4 +28,14 @@ public class ToDoService {
         List<ToDo> list = repository.findAllClose();
         return list;
     }
+
+    public List<ToDo> findAll() {
+        List<ToDo> list = repository.findAll();
+        return list;
+    }
+
+    public ToDo create(ToDo object) {
+        object.setId(null);
+        return repository.save(object);
+    }
 }

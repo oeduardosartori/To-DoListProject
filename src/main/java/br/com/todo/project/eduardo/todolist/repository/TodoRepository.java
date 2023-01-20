@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface TodoRepository extends JpaRepository<ToDo, Long> {
 
-    @Query("SELECT obj FROM ToDo obj WHERE obj.finalizado = false ORDER BY obj.dataFinal")
+    @Query("SELECT obj FROM TodoList obj WHERE obj.finalizado = 0 ORDER BY obj.dataFinal")
     List<ToDo> findAllOpen();
 
-    @Query("SELECT obj FROM ToDo obj WHERE obj.finalizado = true ORDER BY obj.dataFinal")
+    @Query("SELECT obj FROM TodoList obj WHERE obj.finalizado = 1 ORDER BY obj.dataFinal")
     List<ToDo> findAllClose();
 }

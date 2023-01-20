@@ -4,11 +4,10 @@ import br.com.todo.project.eduardo.todolist.domain.ToDo;
 import br.com.todo.project.eduardo.todolist.services.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController @RequestMapping(value = "/todos")
@@ -33,6 +32,20 @@ public class TodoResource {
     public ResponseEntity<List<ToDo>> listClose() {
         List<ToDo> list = service.findAllClose();
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ToDo>> listAll() {
+        List<ToDo> list = service.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+
+    @PostMapping
+    public ResponseEntity<ToDo> create(@RequestBody ToDo object) {
+        object = service.create(object);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(object.getId()).toUri();
+        return ResponseEntity.created(uri).body(object);
     }
 
 }
