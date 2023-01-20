@@ -54,4 +54,10 @@ public class TodoResource {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ToDo> update(@PathVariable Long id, @RequestBody ToDo object) {
+        ToDo newObj = service.update(id, object);
+        return ResponseEntity.ok().body(newObj);
+    }
+
 }

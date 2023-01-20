@@ -44,4 +44,13 @@ public class ToDoService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    public ToDo update(Long id, ToDo object) {
+        ToDo newObj = findById(id);
+        newObj.setTitulo(object.getTitulo());
+        newObj.setDataFinal(object.getDataFinal());
+        newObj.setDescricao(object.getDescricao());
+        newObj.setFinalizado(object.getFinalizado());
+        return repository.save(newObj);
+    }
 }
