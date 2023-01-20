@@ -48,4 +48,10 @@ public class TodoResource {
         return ResponseEntity.created(uri).body(object);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

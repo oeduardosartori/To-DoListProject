@@ -38,4 +38,8 @@ public class ToDoService {
         object.setId(null);
         return repository.save(object);
     }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }
