@@ -2,6 +2,7 @@ package br.com.todo.project.eduardo.todolist.services;
 
 import br.com.todo.project.eduardo.todolist.domain.ToDo;
 import br.com.todo.project.eduardo.todolist.repository.TodoRepository;
+import br.com.todo.project.eduardo.todolist.services.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ public class ToDoService {
 
     public ToDo findById(Long id) {
         Optional<ToDo> object = repository.findById(id);
-        return object.orElse(null);
+        return object.orElseThrow(() -> new NotFoundException(
+                "Objeto não econtrado! Id:  " + id + ", Tipo: " + ToDo.class.getName()));
     }
 
     public List<ToDo> findAllOpen() {
