@@ -1,9 +1,11 @@
 package br.com.todo.project.eduardo.todolist.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Table(name = "todolist")
 @Entity(name = "TodoList")
@@ -16,7 +18,8 @@ public class ToDo {
     private Long id;
     private String titulo;
     private String descricao;
-    private LocalDateTime dataFinal;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataFinal;
     private Boolean finalizado = false;
 
 }
